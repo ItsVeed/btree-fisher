@@ -1,6 +1,7 @@
 package conditions;
 
 import btree.Task;
+import com.epicbot.api.shared.entity.NPC;
 import com.epicbot.api.shared.entity.SceneObject;
 import com.epicbot.api.shared.script.LoopScript;
 
@@ -14,7 +15,7 @@ public class CanSeeObject extends Task {
     }
 
     public STATUS run() {
-        SceneObject obj = ctx.objects().query().id(object).results().nearest();
+        NPC obj = ctx.npcs().query().id(object).results().nearest();
         if (obj != null) {
             if (obj.isVisible()) {
                 return STATUS.SUCCEEDED;
