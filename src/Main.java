@@ -52,15 +52,6 @@ public class Main extends LoopScript {
                         )
                 ),
 
-                // If can see object move on else turn camera to object
-                new Selector(this,
-                        new CanSeeObject(this, spotId),
-                        new Sequence(this,
-                                new Inverter(this, new CanSeeObject(this, spotId)),
-                                new TurnToObject(this, spotId)
-                        )
-                ),
-
                 // Fishing after all reqs are met
                 new ClickObject(this, spotId)
 
