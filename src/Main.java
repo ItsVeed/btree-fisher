@@ -21,39 +21,41 @@ public class Main extends LoopScript {
     @Override
     protected int loop() {
 
-        new Sequence(this,
+        new Selector(this,
 
                 // If has inventory space move on else deposit at the bank
-                new Selector(this,
-                        new HasInventorySpace(this),
 
-                        // Bank when inventory is full
-                        new Sequence(this,
-                            new Inverter(this, new HasInventorySpace(this)),
-                            new Sequence(this,
-                                new Inverter(this, new BankIsReachable(this)),
-                                new WalkToNearestBank(this)
-                            ),
-                            new Sequence(this,
-                                new Inverter(this, new BankIsOpen(this)),
-                                new OpenBank(this)
-                            ),
-                            new DepositInventory(this)
-                        )
+
+                // Bank when inventory is full
+                new Sequence(this,
+                    new Inverter(this, new HasInventorySpace(this)),
+                    new Selector(this,
+                        new BankIsReachable(this),
+                        new WalkToNearestBank(this)
+                    ),
+                    new Selector(this,
+                        new BankIsOpen(this),
+                        new OpenBank(this)
+                    ),
+                    new DepositInventory(this)
                 ),
+
 
                 // If in area move on else go to area
-                new Selector(this,
-                        new InArea(this, area),
 
-                        new Sequence(this,
-                                new Inverter(this, new InArea(this, area)),
-                                new WalkTo(this, area.getCentralTile())
-                        )
+
+                new Sequence(this,
+                        new Inverter(this, new InArea(this, area)),
+                        new WalkTo(this, area.getCentralTile())
                 ),
 
+
                 // Fishing after all reqs are met
-                new ClickObject(this, spotId)
+                new Selector(this,
+                        new IsAnimating(this),
+                        new ClickObject(this, spotId)
+                )
+
 
 
         ).run();

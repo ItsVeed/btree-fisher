@@ -18,5 +18,4 @@ public class HasInventorySpace extends Task {
         return STATUS.SUCCEEDED;
     }
 
-    public void terminate() {} ;
 }

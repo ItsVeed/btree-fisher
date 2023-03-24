@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="btree">
+    <output-path>$PROJECT_DIR$/out/artifacts/btree</output-path>
+    <root id="archive" name="btree.jar">
+      <element id="module-output" name="btree-fisher" />
+      <element id="library" level="project" name="btree-epicbot" />
+    </root>
+  </artifact>
+</component>
